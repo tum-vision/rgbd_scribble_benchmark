@@ -3,7 +3,7 @@ Export Layers
 What is it?
 -----------
 
-Export Layers is a [GIMP](https://www.gimp.org/) plug-in which exports a specified layer as a separate png-image for all images in a directory.
+Export Layers is a [GIMP](https://www.gimp.org/) plug-in which exports a specified layer as a separate png-image for all files defined by a pattern in a directory.
 
 Requirements
 ------------
@@ -61,7 +61,7 @@ Usage
 
 Open a terminal and enter:
 
-     gimp -i -b '(python-export-layers RUN-NONINTERACTIVE "[pattern]" "[directory path]" 0)' -b '(gimp-quit 0)'
+     gimp -i -b '(python-export-layers RUN-NONINTERACTIVE "[pattern]" "[directory path]" [layer number])' -b '(gimp-quit 0)'
 
 
 For example:
