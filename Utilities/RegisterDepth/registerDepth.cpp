@@ -11,7 +11,7 @@ using namespace std;
 
 int main( int argc, const char** argv )
 {
-	FileStorage intr_stereo("intrinsics_stereo.yml", FileStorage::READ);
+	FileStorage intr_stereo("calib_results.yml", FileStorage::READ);
 	
 	Mat cameraMatrixIR, distCoeffsIR, cameraMatrixColor, distCoeffsColor, Rt;
 	intr_stereo["cameraMatrixIR"] >> cameraMatrixIR;
