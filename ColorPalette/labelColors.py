@@ -51,9 +51,8 @@ def main():
     photo_color = ImageTk.PhotoImage(color_img)
     photo_img = ImageTk.PhotoImage(img)
     
-    # logo = PhotoImage(file="../images/python_logo_small.gif")
     w1 = tkinter.Label(root, image=photo_color).pack()
-    explanation = """Find label name of this color:"""
+    explanation = color
     w2 = tkinter.Label(root, 
                padx = 10, 
                text=explanation).pack()
