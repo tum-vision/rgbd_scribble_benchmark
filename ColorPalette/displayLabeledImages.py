@@ -22,8 +22,18 @@ def main():
 
 def displayAll(img_index):
     global img_list
+    global palette
+    
     img = Image.open(img_list[img_index])
-    checkPalette(img.getpalette())
+    if (not checkPalette(img.getpalette())):
+        root = tk.Tk()
+        photo_img = ImageTk.PhotoImage(img)
+        img.putpalette(palette)
+        photo_img_changed = ImageTk.PhotoImage(img)
+        w1 = tk.Label(root, image=photo_img).pack()
+        w2 = tk.Label(root, image=photo_img_changed).pack()
+        root.mainloop()
+    
     return
 
 def checkPalette(img_palette):
