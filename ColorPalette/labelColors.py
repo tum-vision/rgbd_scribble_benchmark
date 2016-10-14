@@ -36,7 +36,10 @@ def main():
     img_list = findImages(color_index, color)
     
     if (len(img_list) == 0):
-        print("No image with this color.")
+        print("No image with this color: " + str(color))
+        label = "NoImg"
+        csv_file.set_value(color_index,'Label',label)
+        csv_file.to_csv("LabelColorMapping.csv", sep=';',index=False)
         sys.exit()
     
     global img_number
@@ -71,15 +74,16 @@ def key(event):
         
         if event.char == 'n':
             img_number = img_number+1
+            img_number = img_number % (len(img_list)-1)
         elif event.char == 'p':
             img_number = img_number-1
-        
+            img_number = img_number % (len(img_list)-1)
         img_path = img_list[img_number]
         
         if event.char == 'c':
             img_path = str.replace(img_path, 'gt', 'image')
         
-        img_number = img_number % (len(img_list)-1)
+        
         img = Image.open(img_path)
         photo_img = ImageTk.PhotoImage(img)
         global w3
