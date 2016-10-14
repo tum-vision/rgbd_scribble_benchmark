@@ -1,5 +1,5 @@
 Label;R;G;B
-;0;0;0
+Noise;0;0;0
 Table;128;0;0
 Glassware;0;128;0
 Plant;128;128;0
@@ -14,9 +14,9 @@ Pillow;192;128;0
 Plate;64;0;128
 Curtain;192;0;128
 Kitchen cabinet;64;128;128
-;192;128;128
+Bowl;192;128;128
 (Metal) article;0;64;0
-;128;64;0
+Unknown;128;64;0
 Lamp;0;192;0
 Frame;128;192;0
 Salt/Pepper;0;64;128

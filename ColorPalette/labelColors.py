@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 from PIL import Image, ImageTk
 import glob, os
 import numpy as np
@@ -32,7 +33,7 @@ def main():
     color = colormap[color_index]
     
     global img_list
-    img_list = findImages(color_index)
+    img_list = findImages(color_index, color)
     
     if (len(img_list) == 0):
         print("No image with this color.")
@@ -77,10 +78,10 @@ def key(event):
         img_path = img_list[img_number]
         
         if event.char == 'c':
-            img_path = string.replace(img_path, 'gt', 'image')
+            img_path = str.replace(img_path, 'gt', 'image')
         
         img_number = img_number % (len(img_list)-1)
-        img = Image.open(img_list[img_number])
+        img = Image.open(img_path)
         photo_img = ImageTk.PhotoImage(img)
         global w3
         w3.configure(image=photo_img)
@@ -96,14 +97,23 @@ def key(event):
     root.bind_all('<Key>', key)
 
 
-def findImages(color_index):
+def findImages(color_index, color):
     out = []
     for infile in sorted(glob.glob("../LabeledImages/*gt.png")):
         img = Image.open(infile)
-        img_colors = np.array(img)
+        img_indexed_colors = np.array(img)
+        
+        palette = img.getpalette()
+        palette = np.array(palette).reshape(len(palette)/3, 3)
+        
+        color_index2 = np.where(np.all(palette==color, axis=1))[0][0]
+        
+        if color_index2 != color_index:
+            print("Different color indices. Original:" + str(color_index) + " - Image: " + str(color_index))
+        color_index = color_index2
         
         
-        if (color_index in img_colors[:,:]):
+        if (color_index in img_indexed_colors[:,:]):
             out.append(infile)
     return out
 
