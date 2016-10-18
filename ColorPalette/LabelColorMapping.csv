@@ -22,9 +22,9 @@ Frame;128;192;0
 Salt/Pepper;0;64;128
 Small Container;128;64;128
 Food;0;192;128
-Flowerpot;128;192;128
+Noise;128;192;128
 Grater;64;64;0
-Mug;192;64;0
+Noise;192;64;0
 Couch;64;192;0
 NoImg;192;192;0
 Pad;64;64;128
@@ -34,7 +34,7 @@ Shelf;192;192;128
 Noise;0;0;64
 Food;128;0;64
 Sink;0;128;64
-Scissors;128;128;64
+Kitchen utensil;128;128;64
 Laptop;0;0;192
 Water tap;128;0;192
 Fridge;0;128;192
@@ -42,15 +42,15 @@ Plant Pot;128;128;192
 Basket;64;0;64
 Carpet;192;0;64
 NoImg;64;128;64
-Croissant;192;128;64
+Pastry;192;128;64
 Table mats;64;0;192
 Soap dispenser;192;0;192
 Kitchen scrubber;64;128;192
-NoImg;192;128;192
+Wooden figure;192;128;192
 NoImg;0;64;64
 Book;128;64;64
 NoImg;0;192;64
-NoImg;128;192;64
+Grill;128;192;64
 NoImg;0;64;192
 Bed;128;64;192
 Door;0;192;192
@@ -71,7 +71,7 @@ Noise;32;0;128
 Person;160;0;128
 Machine;32;128;128
 Information sign;160;128;128
-Potholders;96;0;0
+Noise;96;0;0
 Perfume bottle;224;0;0
 Mobile phone;96;128;0
 Baby buggy;224;128;0
@@ -89,11 +89,11 @@ Fire alarm;32;192;128
 NoImg;160;192;128
 Plate rack;96;64;0
 Panel;224;64;0
-NoImg;96;192;0
+Tray;96;192;0
 NoImg;224;192;0
 Noise;96;64;128
-NoImg;224;64;128
-NoImg;96;192;128
+Pot;224;64;128
+Pan;96;192;128
 Noise;224;192;128
 NoImg;32;0;64
 NoImg;160;0;64
@@ -183,7 +183,7 @@ NoImg;0;96;192
 NoImg;128;96;192
 NoImg;0;224;192
 NoImg;128;224;192
-NoImg;64;96;64
+Plastic figure;64;96;64
 NoImg;192;96;64
 NoImg;64;224;64
 NoImg;192;224;64
