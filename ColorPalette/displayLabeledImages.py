@@ -5,36 +5,83 @@ import numpy as np
 import pandas as pd
 import sys
 import string
+import pathlib
+
+import matplotlib.colors as colors
 
 import tkinter as tk
+
 from tkinter import simpledialog
 
 img_list = sorted(glob.glob("../LabeledImages/*gt.png"))
 palette = np.loadtxt("LabelColorMapping.csv",skiprows=1,delimiter=';',usecols=(1,2,3)).astype(int)
 palette = palette.ravel()
 palette = list(palette)
-
+csv_file = pd.read_csv("LabelColorMapping.csv",delimiter=";")
+labels = csv_file['Label']
+img_index = 0
+list_ids = []
 
 def main():
-    img_index = 0
-    displayAll(img_index)
+    global root
+    root = tk.Tk()
+    displayAll()
     return
 
-def displayAll(img_index):
+def displayAll():
+    global img_index
     global img_list
     global palette
+    global root
+    global photo_img
+    global label_img
+    global list_ids
+    global w_canvas
     
-    img = Image.open(img_list[img_index])
-    if (not checkPalette(img.getpalette())):
-        root = tk.Tk()
-        photo_img = ImageTk.PhotoImage(img)
-        img.putpalette(palette)
-        photo_img_changed = ImageTk.PhotoImage(img)
-        w1 = tk.Label(root, image=photo_img).pack()
-        w2 = tk.Label(root, image=photo_img_changed).pack()
-        root.mainloop()
+    gt_path = img_list[img_index]
+    img=Image.open(gt_path)
+    
+    # if (not checkPalette(img.getpalette())):
+    #     photo_img1 = ImageTk.PhotoImage(img)
+    #     img.putpalette(palette)
+    #     photo_img2 = ImageTk.PhotoImage(img)
+    #     w1 = tk.Label(root, image=photo_img1).pack()
+    #     w2 = tk.Label(root, image=photo_img2).pack()
+    #     if (tk.messagebox.askyesno("Palette", "Replace palette?")):
+    #         img.save(gt_path)
+    #         return
+    #     root.mainloop()
+    #     root.quit()
+    #     exit()
+    
+    img_path = str.replace(gt_path, 'gt', 'image')
+    if (not pathlib.Path(img_path).is_file()):
+        tk.messagebox.showwarning("Missing","File missing: " + img_path)
+    depth_path = str.replace(gt_path, 'gt', 'depth')
+    if (not pathlib.Path(depth_path).is_file()):
+        tk.messagebox.showwarning("Missing","File missing: " + depth_path)
+    scribble_path = str.replace(img_path, 'depth', 'scribble')
+    if (not pathlib.Path(scribble_path).is_file()):
+        tk.messagebox.showwarning("Missing","File missing: " + scribble_path)
+    
+    
+    
+    photo_img = ImageTk.PhotoImage(img)
+    label_img = tk.Label(root, image=photo_img)
+    label_img.pack(side=tk.LEFT)
+    # list_rects = []
+    w_canvas = tk.Canvas(root, width=400, height=480)
+    w_canvas.pack(side=tk.LEFT)
+    
+    displayLabels(img)
+    
+    root.bind_all('<Key>', key)
+    root.mainloop()
     
     return
+
+def rgb_to_hex(rgb_tuple):
+    return colors.rgb2hex([1.0*x/255 for x in rgb_tuple])
 
 def checkPalette(img_palette):
     global palette
@@ -42,134 +89,83 @@ def checkPalette(img_palette):
         return True
     else:
         return False
+
+def displayLabels(img):
+    img_indexed_colors = np.unique(np.array(img))
+    row = 10
+    for color_index in img_indexed_colors:        
+        w_canvas.create_rectangle(10, row, 30, row+20, fill=rgb_to_hex(palette[(color_index*3):(color_index*3+3)]))
+        w_canvas.create_text(40, row+10, anchor=tk.W, font="Helvetica", text=str(color_index) + ' ' + labels[color_index])
+        row += 30
+
+
+def key(event):
+    global root
+    global img_list
+    global img_index
+    global photo_img
+    global label_img
+    global list_ids
+    global w_canvas
+    
+    root.unbind_all('<Key>')
     
     
-    # # compare color palette of img and of csv_file
-    # # if not equal img_changed = img; img_changed.putpalette of csv_file; display both images; ask if it should be changed; quit
-    # # check if all three images are available
-    # # ttk.tree
-    # # get unique color indices of img
-    # # create small image boxes with colors
-    # # create tkinter labels out of images
-    # # create tkinter labels out of corresponding labels from csv_file
-    # # pack all right
-    # # create tkinter label out of img
-    # # pack left
+    img_path = img_list[img_index]
+    if event.char in ('n', 'p'):
+        if event.char == 'n':
+            img_index = img_index+1
+        elif event.char == 'p':
+            img_index = img_index-1
+        
+        img_index = img_index % (len(img_list)-1)
+        # display gt image
+        # change canvas
+        img_path = img_list[img_index]
+        img = Image.open(img_path)
+        photo_img = ImageTk.PhotoImage(img)
+        label_img.configure(image=photo_img)
+        label_img.image = photo_img
+        # checkPalette
+        
+        w_canvas.delete('all')
+        
+        displayLabels(img)
+    if event.char in ('c','d','g'):
+        if event.char == 'c':
+            img_path = str.replace(img_path, 'gt', 'image')
+        if event.char == 'd':
+            img_path = str.replace(img_path, 'gt', 'depth')
+        img = Image.open(img_path)
+        photo_img = ImageTk.PhotoImage(img)
+        label_img.configure(image=photo_img)
+        label_img.image = photo_img
+    if event.char == 'q':
+        root.quit()
+        exit()
+    if event.char == 'x':
+        old_index = simpledialog.askstring('Exchange color index', 'Color index to be changed: ')
+        new_index = simpledialog.askstring('Exchange color index', str(old_index) + ' -> ')
+        
+        img = Image.open(img_path)
+        img_indexed = np.array(img)
+        
+        img_indexed[np.where(img_indexed == int(old_index))] = int(new_index)
+        # np.place(img_indexed, img_indexed==old_index, [new_index])
+        # img_indexed[img_indexed == old_index] = new_index
+        img_new = Image.fromarray(img_indexed)
+        img_new.putpalette(palette)
+        photo_img = ImageTk.PhotoImage(img_new)
+        label_img.configure(image=photo_img)
+        label_img.image = photo_img
+        # checkPalette
+        
+        w_canvas.delete('all')
+        displayLabels(img_new)
+        img_new.save(img_path)
     
-    # if key == n next image
-    # # image_index = (image_index+1)%(len(list of images)-1)
-    # # displayAll(image_index)
-    # if key == p previous image
-    # # image_index = (image_index-1)%(len(list of images)-1)
-    # # displayAll(image_index)
-    # if key == c color image
-    # # 
-    # if key == s scribble image
-    # if key == d depth image
-    # if key == g gt image
-    # if key == q quit
-    # if key == x exchange color
-    
-    
-    
-    
-    #     global img_list
-    #     global csv_file
-    #     global color_index
-    
-    #     colormap = np.loadtxt("LabelColorMapping.csv",skiprows=1,delimiter=';',usecols=(1,2,3))
-    #     colormap = colormap.astype(int)
-    
-    #     csv_file = pd.read_csv("LabelColorMapping.csv",delimiter=";")
-    #     labels = csv_file['Label']
-    
-    #     color_index = rows[0]
-    #     color = colormap[color_index]
-    
-    #     img_list = findImages(color_index, color)
-    
-    #     if (len(img_list) == 0):
-    #         print("No image with this color: " + str(color))
-    #         label = "NoImg"
-    #         csv_file.set_value(color_index,'Label',label)
-    #         csv_file.to_csv("LabelColorMapping.csv", sep=';',index=False)
-    #         sys.exit()
-    
-    #     global img_number
-    
-    #     img = Image.open(img_list[img_number])
-    #     color_img = Image.new('RGB',(60,60),tuple(color))
-    
-    #     global root
-    #     root = tkinter.Tk()
-    
-    #     photo_color = ImageTk.PhotoImage(color_img)
-    #     photo_img = ImageTk.PhotoImage(img)
-    
-    #     w1 = tkinter.Label(root, image=photo_color).pack()
-    #     explanation = color
-    #     w2 = tkinter.Label(root, 
-    #                padx = 10, 
-    #                text=explanation).pack()
-    #     global w3
-    #     w3 = tkinter.Label(root, image=photo_img)
-    #     w3.pack()
-    #     root.bind_all('<Key>', key)
-    #     root.mainloop()
-    
-    # def key(event):
-    #     global root
-    #     root.unbind_all('<Key>')
-    #     if event.char in ('n', 'p', 'c'):
-    #         global img_number
-    #         global img_list
-    
-    #         if event.char == 'n':
-    #             img_number = img_number+1
-    #             img_number = img_number % (len(img_list)-1)
-    #         elif event.char == 'p':
-    #             img_number = img_number-1
-    #             img_number = img_number % (len(img_list)-1)
-    #         img_path = img_list[img_number]
-    
-    #         if event.char == 'c':
-    #             img_path = str.replace(img_path, 'gt', 'image')
-    
-    
-    #         img = Image.open(img_path)
-    #         photo_img = ImageTk.PhotoImage(img)
-    #         global w3
-    #         w3.configure(image=photo_img)
-    #         w3.image = photo_img
-    #     if event.char == 'l':
-    #         label = simpledialog.askstring('Input', 'Label Name')
-    #         global csv_file
-    #         global color_index
-    #         # add label input to labels
-    #         csv_file.set_value(color_index,'Label',label)
-    #         csv_file.to_csv("LabelColorMapping.csv", sep=';',index=False)
-    #         root.quit()
-    #     root.bind_all('<Key>', key)
-    
-    # def findImages(color_index, color):
-    #     out = []
-    #     for infile in sorted(glob.glob("../LabeledImages/*gt.png")):
-    #         img = Image.open(infile)
-    #         img_indexed_colors = np.array(img)
-    
-    #         palette = img.getpalette()
-    #         palette = np.array(palette).reshape(len(palette)/3, 3)
-    
-    #         color_index2 = np.where(np.all(palette==color, axis=1))[0][0]
-    
-    #         if color_index2 != color_index:
-    #             print("Different color indices. Original:" + str(color_index) + " - Image: " + str(color_index))
-    #         color_index = color_index2
-    
-    
-    #         if (color_index in img_indexed_colors[:,:]):
-    #             out.append(infile)
-    #     return out
+    root.bind_all('<Key>', key)
+
 
 if __name__ == "__main__":
     main()
