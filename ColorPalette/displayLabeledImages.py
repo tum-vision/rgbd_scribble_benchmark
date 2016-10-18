@@ -40,7 +40,7 @@ def displayAll():
     
     gt_path = img_list[img_index]
     img=Image.open(gt_path)
-    
+    root.wm_title(gt_path)
     # if (not checkPalette(img.getpalette())):
     #     photo_img1 = ImageTk.PhotoImage(img)
     #     img.putpalette(palette)
@@ -121,6 +121,7 @@ def key(event):
         img_index = img_index % (len(img_list)-1)
         # display gt image
         # change canvas
+        root.wm_title(img_path)
         img_path = img_list[img_index]
         img = Image.open(img_path)
         photo_img = ImageTk.PhotoImage(img)
@@ -136,6 +137,7 @@ def key(event):
             img_path = str.replace(img_path, 'gt', 'image')
         if event.char == 'd':
             img_path = str.replace(img_path, 'gt', 'depth')
+        root.wm_title(img_path)
         img = Image.open(img_path)
         photo_img = ImageTk.PhotoImage(img)
         label_img.configure(image=photo_img)
