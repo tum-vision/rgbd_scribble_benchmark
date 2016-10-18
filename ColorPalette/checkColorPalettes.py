@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 from PIL import Image
 import glob, os
 import numpy as np
@@ -16,12 +17,12 @@ for infile in glob.glob("../LabeledImages/*gt.png"):
     
     if palette == None:
         print('Add palette: ' + file)
-        img.putpalette(original_map)
-        img.save(infile)
+        # img.putpalette(original_map)
+        # img.save(infile)
     else:
         
         # Determine the total number of colours
-        num_colours = len(palette)/3
+        num_colours = int(len(palette)/3)
         
         # Determine maximum value of the image data type
         # max_val = float(np.iinfo(indexed.dtype).max)
