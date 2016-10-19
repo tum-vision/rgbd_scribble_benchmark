@@ -41,17 +41,17 @@ Fridge;0;128;192
 Plant Pot;128;128;192
 Basket;64;0;64
 Carpet;192;0;64
-NoImg;64;128;64
+Paper roll;64;128;64
 Pastry;192;128;64
 Table mats;64;0;192
 Soap dispenser;192;0;192
 Kitchen scrubber;64;128;192
 Wooden figure;192;128;192
-NoImg;0;64;64
+Beam;0;64;64
 Book;128;64;64
-NoImg;0;192;64
+Clipboard;0;192;64
 Grill;128;192;64
-NoImg;0;64;192
+Candleholder;0;64;192
 Bed;128;64;192
 Door;0;192;192
 Clock;128;192;192
@@ -95,15 +95,15 @@ Noise;96;64;128
 Pot;224;64;128
 Pan;96;192;128
 Noise;224;192;128
-NoImg;32;0;64
-NoImg;160;0;64
+IdontRememberChangelater;32;0;64
+Screen;160;0;64
 NoImg;32;128;64
 Noise;160;128;64
-NoImg;32;0;192
-NoImg;160;0;192
-NoImg;32;128;192
-NoImg;160;128;192
-NoImg;96;0;64
+Keyboard;32;0;192
+Wallet;160;0;192
+Candle;32;128;192
+Computer mouse;160;128;192
+Wooden compartement;96;0;64
 NoImg;224;0;64
 NoImg;96;128;64
 NoImg;224;128;64
@@ -120,7 +120,7 @@ NoImg;160;64;192
 NoImg;32;192;192
 NoImg;160;192;192
 Noise;96;64;64
-NoImg;224;64;64
+Horse figure;224;64;64
 NoImg;96;192;64
 NoImg;224;192;64
 NoImg;96;64;192
@@ -165,7 +165,7 @@ NoImg;0;160;64
 NoImg;128;160;64
 NoImg;0;32;192
 NoImg;128;32;192
-NoImg;0;160;192
+Statue;0;160;192
 Noise;128;160;192
 Noise;64;32;64
 NoImg;192;32;64
@@ -184,9 +184,9 @@ NoImg;128;96;192
 NoImg;0;224;192
 NoImg;128;224;192
 Plastic figure;64;96;64
-NoImg;192;96;64
-NoImg;64;224;64
-NoImg;192;224;64
+Stuffed animal;192;96;64
+Metal Thing;64;224;64
+Bag;192;224;64
 NoImg;64;96;192
 NoImg;192;96;192
 NoImg;64;224;192
