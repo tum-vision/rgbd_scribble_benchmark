@@ -34,7 +34,7 @@ Shelf;192;192;128
 Noise;0;0;64
 Food;128;0;64
 Sink;0;128;64
-Kitchen utensil;128;128;64
+Cooking utensil;128;128;64
 Laptop;0;0;192
 Water tap;128;0;192
 Fridge;0;128;192
@@ -55,7 +55,7 @@ Candleholder;0;64;192
 Bed;128;64;192
 Door;0;192;192
 Clock;128;192;192
-Bedstead;64;64;64
+Noise;64;64;64
 Teddy;192;64;64
 Cup;64;192;64
 Small box;192;192;64
@@ -80,7 +80,7 @@ Carton;224;0;128
 Small box;96;128;128
 Erase marker;224;128;128
 Table napkin;32;64;0
-NoImg;160;64;0
+Can;160;64;0
 NoImg;32;192;0
 Fire damper;160;192;0
 Post-it notes;32;64;128
@@ -95,7 +95,7 @@ Noise;96;64;128
 Pot;224;64;128
 Pan;96;192;128
 Noise;224;192;128
-IdontRememberChangelater;32;0;64
+Blanket;32;0;64
 Screen;160;0;64
 NoImg;32;128;64
 Noise;160;128;64
