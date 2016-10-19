@@ -73,6 +73,8 @@ def displayAll():
     w_canvas = tk.Canvas(root, width=400, height=480)
     w_canvas.pack(side=tk.LEFT)
     
+    w_help = tk.Label(root, text="Keyboard commands:\nn: next image\np: previous image\nc: color image\ng: ground truth\nd: depth image\ns: scribble image\nx: exchange color\nq: quit")
+    w_help.pack(side=tk.LEFT)
     displayLabels(img)
     
     root.bind_all('<Key>', key)
@@ -121,8 +123,8 @@ def key(event):
         img_index = img_index % (len(img_list)-1)
         # display gt image
         # change canvas
-        root.wm_title(img_path)
         img_path = img_list[img_index]
+        root.wm_title(img_path)
         img = Image.open(img_path)
         photo_img = ImageTk.PhotoImage(img)
         label_img.configure(image=photo_img)
@@ -132,11 +134,13 @@ def key(event):
         w_canvas.delete('all')
         
         displayLabels(img)
-    if event.char in ('c','d','g'):
+    if event.char in ('c','d','g','s'):
         if event.char == 'c':
             img_path = str.replace(img_path, 'gt', 'image')
         if event.char == 'd':
             img_path = str.replace(img_path, 'gt', 'depth')
+        if event.char == 's':
+            img_path = str.replace(img_path, 'gt', 'scribbles')
         root.wm_title(img_path)
         img = Image.open(img_path)
         photo_img = ImageTk.PhotoImage(img)
