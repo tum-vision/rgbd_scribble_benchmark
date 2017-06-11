@@ -1,0 +1,36 @@
+* Remove images
+  For several images one of the four parts (image, ground truth, scribbles, depth) is missing. With this script these can be identified and deleted.
+  #+BEGIN_SRC python
+    import os
+    import glob
+    from pathlib import Path
+
+    def deleteIfMissing(str1, rplStr1, rplStr2, rplStr3):
+        files = glob.glob("../LabeledImages/*"+str1+".png")
+        for infile in files:
+            path1 = Path(infile.replace(str1,rplStr1))
+            path2 = Path(infile.replace(str1,rplStr2))
+            path3 = Path(infile.replace(str1,rplStr3))
+
+            remove = 0
+            if not path1.exists() or not path2.exists() or not path3.exists():
+                print(infile,'\n')
+                remove = 1
+
+            if path1.exists() and remove == 1:
+                os.remove(infile.replace(str1,rplStr1))
+            if path2.exists() and remove == 1:
+                os.remove(infile.replace(str1,rplStr2))
+            if path3.exists() and remove == 1:
+                os.remove(infile.replace(str1,rplStr3))
+            if remove == 1:
+                os.remove(infile)
+
+    deleteIfMissing("depth","image","gt","scribbles")
+    deleteIfMissing("image","gt","scribbles","depth")
+    deleteIfMissing("gt","image","scribbles","depth")
+    deleteIfMissing("scribbles","gt","image","depth")
+  #+END_SRC
+
+  #+RESULTS:
+  : None
