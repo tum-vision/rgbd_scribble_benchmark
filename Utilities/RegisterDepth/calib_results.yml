@@ -1,0 +1,26 @@
+%YAML:1.0
+cameraMatrixColor: !!opencv-matrix
+  rows: 3
+  cols: 3
+  dt: d
+  data: [ 574.0527954101562, 0.0, 319.5, 0.0, 574.0527954101562, 239.5, 0.0, 0.0, 1.0 ]
+distCoeffsColor: !!opencv-matrix
+  rows: 5
+  cols: 1
+  dt: d
+  data: [ 0.,0.,0.,0.,0. ]
+cameraMatrixIR: !!opencv-matrix
+  rows: 3
+  cols: 3
+  dt: d
+  data: [ 574.0527954101562, 0.0, 314.5, 0.0, 574.0527954101562, 235.5, 0.0, 0.0, 1.0 ]
+distCoeffsIR: !!opencv-matrix
+  rows: 5
+  cols: 1
+  dt: d
+  data: [ 0.,0.,0.,0.,0. ]
+Rt: !!opencv-matrix
+  rows: 4
+  cols: 4
+  dt: f
+  data: [ 1.,0.0058,-0.002,26.2739e-3,-0.0058, 1.,0.005,-0.2152e-3,0.002,-0.005,1.,0.5389e-1,0.,0.,0.,1. ]

@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 from PIL import Image
 import glob, os
 import numpy as np
@@ -5,7 +6,7 @@ import numpy as np
 original_map = np.loadtxt("pixelvalues.txt")
 original_map = original_map.astype(int)
 
-for infile in glob.glob("../LabeledImages/Bedroom/Labelling/*.png"):
+for infile in glob.glob("../LabeledImages/*gt.png"):
     file, ext = os.path.splitext(infile)
     img = Image.open(infile)
     

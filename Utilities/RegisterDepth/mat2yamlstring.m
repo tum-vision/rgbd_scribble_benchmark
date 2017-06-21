@@ -1,0 +1,13 @@
+function [ yaml_str ] = mat2yamlstring( varname, value )
+
+    if isscalar(value)
+        yaml_str        = sprintf('%s: %d\n', varname, value);
+    else
+        value_serialized = sprintf('%.4f,', value');
+        yaml_str         = sprintf('%s:  !!opencv-matrix\n  rows: %d\n  cols: %d\n  dt: d\n  data: [%s]\n',...
+                                varname,...
+                                size(value,1),...
+                                size(value,1),...
+                                value_serialized(1:end-1) );
+end
+
