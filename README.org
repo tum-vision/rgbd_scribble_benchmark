@@ -2,14 +2,14 @@
 ** Description
    The RGB-D dataset contains the following
    - The number of RGB-D images is 154, each with a corresponding scribble and a ground truth image.
-   - Every image has a resolution of $640\times 480$ pixels.
+   - Every image has a resolution of 640 \times 480 pixels.
    - The measurement of the depth images is millimeter.
    - The categorization differentiates between 95 classes.
    - All scenes are indoor.
 
-   | LabeledImages          | This folder includes all images with the naming convention \[[\text{scene}]\_[\text{number}]\_[\text{image type].png},\] where scene $\in\{\text{bedroom, kitchen, livingroom, random}\}$ and \\ image type $\in\{\text{image, depth, scribbles, gt}\}$. |
-   | rgbd_palette.gpl       | The ground truth and scribble images are converted to indexed mode. The related color palette is saved in this file.                                                                                                                                     |
-   | LabelColorMapping.csv  | This file describes which color belongs to which object class.                                                                                                                                                                                           |
-   | displayLabeldImages.py | For visualization this script provides an overview of one image with the associated classes.                                                                                                                                                             |
-   | RawData                | In this folder the original data in \texttt{.xcf} format can be found.                                                                                                                                                                                   |
-   | Calibration            | This folder contains the scripts, parameters and the images which were used for finding the parameters and for registering the depth images.                                                                                                             |
+   | LabeledImages          | This folder includes all images with the naming convention: [scene]_[number]_[image type].png, where scene is either bedroom, kitchen, livingroom or random and image type is either image, depth, scribbles or gt. |
+   | rgbd_palette.gpl       | The ground truth and scribble images are converted to indexed mode. The related color palette is saved in this file.                                                                                             |
+   | LabelColorMapping.csv  | This file describes which color belongs to which object class.                                                                                                                                                   |
+   | displayLabeldImages.py | For visualization this script provides an overview of one image with the associated classes.                                                                                                                     |
+   | RawData                | In this folder the original data in \texttt{.xcf} format can be found.                                                                                                                                           |
+   | Calibration            | This folder contains the scripts, parameters and the images which were used for finding the parameters and for registering the depth images.                                                                     |
