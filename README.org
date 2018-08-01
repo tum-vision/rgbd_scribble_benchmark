@@ -1,5 +1,5 @@
 * RGB-D Scribble-based Segmentation Benchmark
-** Description
+* Description
    The RGB-D dataset contains the following
    - The number of RGB-D images is 154, each with a corresponding scribble and a ground truth image.
    - Every image has a resolution of 640 \times 480 pixels.
@@ -14,7 +14,7 @@
    | LabelColorMapping.csv   | This file describes which color belongs to which object class.                                                                                                                                                      |
    | displayLabeledImages.py | For visualization this script provides an overview of one image with the associated classes.                                                                                                                        |
    | Calibration             | This folder contains the scripts, parameters and the images which were used for finding the parameters and for registering the depth images.                                                                        |
-** Example
+* Example
    | [[./LabeledImages/kitchen_22_image.png]] | [[./LabeledImages/kitchen_22_gt.png]]        |
    | [[./LabeledImages/kitchen_22_depth.png]] | [[./LabeledImages/kitchen_22_scribbles.png]] |
 
@@ -32,14 +32,13 @@
    #+RESULTS:
    [[file:pointCloud.png]]
 
-** Citation
+* Citation
 If you use the dataset, please cite as following
 
-```
-@misc{tum-rgbd_scribble_dataset,
-   author    = {C. Hazirbas and A. Wiedemann, R. Maier, L. Leal-Taixé and D. Cremers},
-   title     = {TUM RGB-D Scribble-based Segmentation Benchmark},
-   howpublished = {\url{https://github.com/tum-vision/rgbd_scribble_benchmark}},
-   year = {2018}
-}
-```
+    @misc{tum-rgbd_scribble_dataset,
+     author    = {C. Hazirbas and A. Wiedemann, R. Maier, L. Leal-Taixé and D. Cremers},
+     title     = {TUM RGB-D Scribble-based Segmentation Benchmark},
+     howpublished = {\url{https://github.com/tum-vision/rgbd_scribble_benchmark}},
+     year = {2018}
+    }
+
