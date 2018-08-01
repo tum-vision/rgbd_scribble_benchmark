@@ -31,8 +31,8 @@
    #+END_SRC
    #+RESULTS:
    [[file:pointCloud.png]]
-   
- ** Citation
+
+** Citation
    If you use the dataset, please cite as following
  
     @misc{tum-rgbd_scribble_dataset,
