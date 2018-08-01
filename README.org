@@ -1,4 +1,4 @@
-* RGB-D Scribble-based Segmentation Benchmark
+* TUM RGB-D Scribble-based Segmentation Benchmark
 * Description
    The RGB-D dataset contains the following
    - The number of RGB-D images is 154, each with a corresponding scribble and a ground truth image.
