@@ -37,7 +37,7 @@ If you use the dataset, please cite as following
 
 #+BEGIN_SRC
     @misc{tum-rgbd_scribble_dataset,
-     author    = {C. Hazirbas and A. Wiedemann, R. Maier, L. Leal-Taixé and D. Cremers},
+     author    = {Caner Hazirbas and Andreas Wiedemann and Robert Maier and Laura Leal-Taixé and Daniel Cremers},
      title     = {TUM RGB-D Scribble-based Segmentation Benchmark},
      howpublished = {\url{https://github.com/tum-vision/rgbd_scribble_benchmark}},
      year = {2018}
